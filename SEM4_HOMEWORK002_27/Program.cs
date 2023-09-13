@@ -20,7 +20,7 @@ int Getcount(int num) // суммирование всех цифр натура
     int count = 0;
     for (; 0 < num; num /= 10)
     {
-        count = count + num % 10;
+        count += num % 10;
     }
     return count;
 }
