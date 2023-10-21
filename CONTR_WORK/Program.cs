@@ -11,13 +11,15 @@
 // [“1234”, “1567”, “-2”, “computer science”] → [“-2”]
 // [“Russia”, “Denmark”, “Kazan”] → []
 
-// МЕТОД 1 - ЗАДАНИЕ натурального числа > 0,
+// МЕТОД 1 (функция) - ЗАДАНИЕ натурального числа > 0,
 // с контролем допустимости типа значения и величины, с рекурсией
-int GetNumbIntContr(string message, out bool contrNum) // conrtNum - True (корректно)/False (некорректно)
+int GetNumbIntContr(string message)
 {
     Console.Write($"\n Задайте число {message}");
     string numberStr = Console.ReadLine();
-    contrNum = int.TryParse(numberStr, out int numN); // numN = 0 (если некорректно)
+    
+    // conrtNum - True (корректно)/False (некорректно)
+    bool contrNum = int.TryParse(numberStr, out int numN); // numN = 0 (если некорректно)
 
     if ((contrNum) && (numN > 0)) // обработка корректного значения
     {
@@ -26,10 +28,10 @@ int GetNumbIntContr(string message, out bool contrNum) // conrtNum - True (ко�
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine($" Заданное значение ({numberStr}) некорректно!");
     Console.ForegroundColor = ConsoleColor.White;
-    return GetNumbIntContr(message, out bool contrN);
+    return GetNumbIntContr(message);
 }
 
-// МЕТОД 2 - ЗАДАНИЯ с клав-ы массива строк,
+// МЕТОД 2 - ЗАДАНИЯ с клав-ы массива строк
 void GetStringArr(string [] diffCh)
 {
     int size = diffCh.Length;
@@ -42,36 +44,18 @@ void GetStringArr(string [] diffCh)
     }
 }
 
-// int[] GetNumArr(int size, out bool contrNum) // ввод элементов массива, конверт.(контроль допустим.)
-// {
-//     int[] arrayNN = new int[size];
-//     string numberStr;
-//     contrNum = true; // интегратор контроля допустимости введеных значений True/False
-//     bool contrTem; // переменная контроля допустимости текущего введенного значения
-           
-//     Console.WriteLine($"\nЗадайте массив NN[] из {size} элементов (целых чисел)" +
-//     "\nдля последующего вывода массива на экран.\n");
-    
-//     for (int i = 0; i < size;  i++)
-//     {
-//         Console.Write($"Задайте значение {i}-го элемента массива. NN[{i}] = ");
-//         numberStr = Console.ReadLine();
-
-//         contrTem = int.TryParse(numberStr, out int numN);
-//         contrNum = contrNum && contrTem;
-        
-//         arrayNN[i] = numN; // В случае некорректного ввода array[i] будет = 0
-//     }
-//     return arrayNN;
-// }
-
-void PrintScr(string [] diffCh) // вывод на экран результатов задания массива с клавиатуры
+// МЕТОД 3 - ВЫВОД на экран передаваемого методу массива строк
+void PrintScr(string [] diffCh)
 {
     int length = diffCh.Length;
-    Console.Write($"\nЗадан массив строк из {length} элемента(ов):\n[  ");
+    Console.Write($"\nЗадан массив строк из {length} элемента(ов)," +
+    " каждый элемент обрамлен круглыми скобками :\n[  ");
     for (int i = 0; i < length; i++)
     {
-        Console.Write($"'{diffCh[i]}'  ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write($"({diffCh[i]})");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("  ");
     }
     Console.Write($"]");
 }
@@ -91,8 +75,7 @@ Console.Clear();
 Console.WriteLine();
 
 // ЗАДАНИЕ с клав-ы РАЗМЕРА МАССИВА, с контролем допустимости задан.данных, вкл.тип значения
-int sizeArr = GetNumbIntContr("элементов массива - натуральное (целое, положительное) \t N: ",
-                             out bool contrN);
+int sizeArr = GetNumbIntContr("элементов массива - натуральное (целое, положительное) \t N: ");
 
 // ЗАДАНИЕ с клав-ы всех {sizeArr} элементов МАССИВА строк
 string [] diffChar = new string [sizeArr]; // объявление массива строк длиной {sizeArr}
