@@ -49,34 +49,38 @@ void GetStringArr(string [] diffCh)
 string [] SelLessValueLength(string [] diffCh, int valueLength = 3)
 {
     
-    int sizeNew3Ch = 0;
-    string [] new3Ch = new string [diffCh.Length];
+    int sizeNew3Ch = 0; // счетчик числа элементов нового массива
+    string [] new3Ch = new string [diffCh.Length]; // объявление нового массива
 
-    for (int i = 0; i < diffCh.Length; i++)
+    for (int i = 0; i < diffCh.Length; i++) // цикл по всем элементам заданного массива
     {
-        if (diffCh[i] <= valueLength)
+        if (diffCh[i].Length <= valueLength)
         {
-            new3Ch[sizeNew3Ch] = diffCh[i];
-            sizeNew3Ch ++;
+            new3Ch[sizeNew3Ch] = diffCh[i]; // формирование нового массива с длиной эл-та <= 3
+            sizeNew3Ch ++; // увеличение счетчика элементов нового массива
         }
     }
 
-    Array.Resize(ref new3Ch, sizeNew3Ch);
+    Array.Resize(ref new3Ch, sizeNew3Ch); // уменьшение размера нового массива до определ.размера
     return new3Ch;
 }
 
 // МЕТОД 4 - ВЫВОД на экран передаваемого методу массива строк
 void PrintScr(string [] diffCh)
 {
+    Console.Write(" [ ");
     int length = diffCh.Length;
     for (int i = 0; i < length; i++)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.Write($"({diffCh[i]})");
+        Console.Write("\"");
         Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("  ");
+        Console.Write($"{diffCh[i]}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write("\"\t");
+        Console.ForegroundColor = ConsoleColor.White;
     }
-    Console.Write($"]");
+    Console.Write("]\n");
 }
 
 
@@ -100,14 +104,14 @@ GetStringArr(diffChar); // обращение к Методу 2
 string [] new3Char = SelLessValueLength(diffChar); // обращение к Методу 3
 
 // ВЫВОД на экран всех элементов заданного с клавиатуры МАССИВА строк (Метод 4)
-Console.Write($"\nЗадан массив строк, состоящий из {sizeArr} элемента(ов)," +
-               " каждый элемент обрамлен круглыми скобками :\n[  ");
+Console.Write($"\n Задан массив строк, состоящий из {diffChar.Length} элемента(ов)," +
+               " каждый элемент обрамлен желтыми кавычками :\n");
 PrintScr(diffChar); // обращение к Методу 4
 
 // ВЫВОД на экран всех элементов сформированного МАССИВА строк длиной <= 3 (Метод 4)
-Console.Write($"\nСформирован новый массив строк (из заданного массива)," +
-               "состоящий из {new3Char.Length} элемента(ов), длина каждого <= 3 символам," +
-               " каждый элемент обрамлен круглыми скобками :\n[  ");
+Console.Write("\n Сформирован новый массив строк (из заданного массива)," +
+             $" состоящий из {new3Char.Length} элемента(ов),\n длина каждого <= 3 символам," +
+              " каждый элемент обрамлен желтыми кавычками :\n");
 PrintScr(new3Char); // обращение к Методу 4
 
 // Задержка экрана
